@@ -1,0 +1,9 @@
+{
+  "name": "SCENEONE",
+  "short_name": "SCENEONE",
+  "description": "SCENEONE Streaming",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#120909",
+  "theme_color": "#e50914"
+}
