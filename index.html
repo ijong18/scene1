@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="id">
+<head> 
+<link rel="manifest" href="manifest.json">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCENEONE</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#120909;
+color:white;
+overflow:hidden;
+}
+
+/* SPLASH */
+
+#splash{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:linear-gradient(180deg,#120909,#2a0000);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+
+.logo{
+display:flex;
+font-size:70px;
+font-weight:bold;
+color:#e50914;
+}
+
+#logoS{
+filter:blur(20px);
+animation:sblur 2s forwards;
+}
+
+#logoText{
+width:0;
+overflow:hidden;
+white-space:nowrap;
+animation:showText 1.5s forwards;
+animation-delay:2s;
+}
+
+@keyframes sblur{
+100%{
+filter:blur(0);
+}
+}
+
+@keyframes showText{
+100%{
+width:320px;
+}
+}
+
+/* PAGE */
+
+.page{
+display:none;
+}
+
+.auth{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.card{
+width:100%;
+max-width:400px;
+background:#1f1f1f;
+padding:25px;
+border-radius:20px;
+}
+
+.title{
+font-size:40px;
+font-weight:bold;
+text-align:center;
+color:#e50914;
+}
+
+.sub{
+text-align:center;
+color:#999;
+margin:15px 0;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:12px;
+background:#2b2b2b;
+color:white;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:12px;
+border:none;
+border-radius:12px;
+background:#e50914;
+color:white;
+font-size:16px;
+}
+
+.link{
+text-align:center;
+margin-top:15px;
+color:#aaa;
+}
+
+/* HOME */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+background:black;
+}
+
+.profileMini{
+width:45px;
+height:45px;
+border-radius:50%;
+background:white;
+display:flex;
+justify-content:center;
+align-items:center;
+color:black;
+font-size:22px;
+}
+
+.banner{
+margin:15px;
+padding:25px;
+border-radius:20px;
+background:linear-gradient(135deg,#e50914,#300000);
+}
+
+.row{
+display:flex;
+overflow:auto;
+gap:15px;
+padding:15px;
+}
+
+.movie{
+min-width:180px;
+}
+
+.movie img{
+width:180px;
+height:250px;
+border-radius:15px;
+object-fit:cover;
+}
+
+.bottomNav{
+display:none;
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+height:70px;
+background:#111;
+border-top:1px solid #333;
+justify-content:space-around;
+align-items:center;
+font-size:25px;
+}
+
+video{
+width:100%;
+background:black;
+max-height:250px;
+}
+
+.profileBig{
+width:120px;
+height:120px;
+border-radius:50%;
+background:white;
+margin:25px auto 15px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:55px;
+color:black;
+}
+
+.profileName{
+text-align:center;
+font-size:24px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.menuBox{
+background:#1f1f1f;
+margin:15px;
+border-radius:15px;
+overflow:hidden;
+}
+
+.menuItem{
+padding:18px;
+border-bottom:1px solid #333;
+}
+
+</style>
+</head>
+<body>
+
+<div id="splash">
+
+<div class="logo">
+
+<div id="logoS">S</div>
+
+<div id="logoText">CENEONE</div>
+
+</div>
+
+</div>
+
+<div id="loginPage" class="page auth">
+
+<div class="card">
+
+<div class="title">
+SCENEONE
+</div>
+
+<div class="sub">
+Masuk Dengan Email Atau Nomor WA
+</div>
+
+<input id="loginUser" placeholder="Email atau Nomor WA">
+
+<input id="loginPass" type="password" placeholder="Password">
+
+<button onclick="login()">
+MASUK
+</button>
+
+<button onclick="bukaDaftar()">
+DAFTAR
+</button>
+
+<div class="link" onclick="bukaLupa()">
+Lupa Password?
+</div>
+
+</div>
+
+</div>
+
+<div id="registerPage" class="page auth">
+
+<div class="card">
+
+<div class="title">
+DAFTAR
+</div>
+
+<input id="regUser" placeholder="Email atau Nomor WA">
+
+<button onclick="alert('OTP TEST : 201018')">
+KIRIM OTP
+</button>
+
+<input id="regOtp" placeholder="OTP">
+
+<input id="regPass" type="password" placeholder="Password">
+
+<button onclick="daftar()">
+BUAT AKUN
+</button>
+
+</div>
+
+</div>
+
+<div id="forgotPage" class="page auth">
+
+<div class="card">
+
+<div class="title">
+RESET
+</div>
+
+<input id="forgotOtp" placeholder="OTP">
+
+<input id="forgotPass" type="password" placeholder="Password Baru">
+
+<button onclick="resetPassword()">
+SIMPAN PASSWORD
+</button>
+
+</div>
+
+</div>
+
+<div id="homePage" class="page">
+
+<div class="topbar">
+
+<div class="profileMini" onclick="profil()">
+👤
+</div>
+
+<div style="font-size:28px;">
+🔔
+</div>
+
+</div>
+
+<div class="banner">
+
+<h1>SCENEONE</h1>
+
+<p style="margin-top:10px;">
+Film, Series, Anime & Superhero
+</p>
+
+</div>
+
+<h2 style="padding:15px;">
+🔥 Superhero Populer
+</h2>
+
+<div class="row">
+
+<div class="movie" onclick="bukaFilm('Spider-Man')">
+<img src="https://placehold.co/180x250">
+<h3>Spider-Man</h3>
+</div>
+
+<div class="movie" onclick="bukaFilm('Batman')">
+<img src="https://placehold.co/180x250">
+<h3>Batman</h3>
+</div>
+
+<div class="movie" onclick="bukaFilm('Avengers')">
+<img src="https://placehold.co/180x250">
+<h3>Avengers</h3>
+</div>
+
+<div class="movie" onclick="bukaFilm('Joker')">
+<img src="https://placehold.co/180x250">
+<h3>Joker</h3>
+</div>
+
+</div>
+
+</div>
+
+<div id="moviePage" class="page">
+
+<video controls>
+<source src="https://www.w3schools.com/html/mov_bbb.mp4">
+</video>
+
+<div style="padding:20px;">
+
+<h1 id="movieTitle">
+Film
+</h1>
+
+<button>
+▶ Mulai Menonton
+</button>
+
+<button>
+📺 Episode
+</button>
+
+<button>
+▶ Lanjutkan Menonton
+</button>
+
+<button onclick="home()">
+⬅ Kembali
+</button>
+
+</div>
+
+</div>
+
+<div id="profilePage" class="page">
+
+<div class="profileBig">
+👤
+</div>
+
+<div class="profileName">
+SCENEONE USER
+</div>
+
+<div class="menuBox">
+
+<div class="menuItem">
+✏ Edit Profil
+</div>
+
+<div class="menuItem">
+❤️ Favorit
+</div>
+
+<div class="menuItem">
+🎬 Riwayat Nonton
+</div>
+
+<div class="menuItem"
+onclick="premium()">
+💎 Premium
+</div>
+
+<div class="menuItem"
+onclick="logout()">
+🚪 Logout
+</div>
+
+</div>
+
+</div>
+
+<div class="bottomNav" id="nav">
+
+<div onclick="home()">🏠</div>
+
+<div>🔍</div>
+
+<div onclick="profil()">👤</div>
+
+</div>
+
+<script>
+
+const OTP="201018";
+
+setTimeout(function(){
+
+document.getElementById("splash").style.display="none";
+
+document.getElementById("loginPage").style.display="flex";
+
+document.body.style.overflow="auto";
+
+},4500);
+
+function bukaDaftar(){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("registerPage").style.display="flex";
+
+}
+
+function bukaLupa(){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("forgotPage").style.display="flex";
+
+}
+
+function daftar(){
+
+if(document.getElementById("regOtp").value!==OTP){
+
+alert("OTP Salah");
+return;
+
+}
+
+localStorage.setItem(
+"sceneUser",
+document.getElementById("regUser").value
+);
+
+localStorage.setItem(
+"scenePass",
+document.getElementById("regPass").value
+);
+
+alert("Akun Berhasil Dibuat");
+
+document.getElementById("registerPage").style.display="none";
+document.getElementById("loginPage").style.display="flex";
+
+}
+
+function login(){
+
+if(
+
+document.getElementById("loginUser").value===localStorage.getItem("sceneUser")
+
+&&
+
+document.getElementById("loginPass").value===localStorage.getItem("scenePass")
+
+){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("homePage").style.display="block";
+document.getElementById("nav").style.display="flex";
+
+}else{
+
+alert("Login Gagal");
+
+}
+
+}
+
+function resetPassword(){
+
+if(document.getElementById("forgotOtp").value!==OTP){
+
+alert("OTP Salah");
+return;
+
+}
+
+localStorage.setItem(
+"scenePass",
+document.getElementById("forgotPass").value
+);
+
+alert("Password Berhasil Diganti");
+
+document.getElementById("forgotPage").style.display="none";
+document.getElementById("loginPage").style.display="flex";
+
+}
+
+function bukaFilm(nama){
+
+document.getElementById("homePage").style.display="none";
+document.getElementById("moviePage").style.display="block";
+
+document.getElementById("movieTitle").innerHTML=nama;
+
+}
+
+function profil(){
+
+document.getElementById("homePage").style.display="none";
+document.getElementById("moviePage").style.display="none";
+document.getElementById("profilePage").style.display="block";
+
+}
+
+function home(){
+
+document.getElementById("profilePage").style.display="none";
+document.getElementById("moviePage").style.display="none";
+document.getElementById("homePage").style.display="block";
+
+}
+
+function premium(){
+
+alert(
+"💎 SCENEONE PREMIUM\n\nRp20.000 / bulan\n\nRp30.000 / 4 bulan\n\nRp50.000 / tahun"
+);
+
+}
+
+function logout(){
+
+localStorage.clear();
+location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
+
+<script>
+
+setTimeout(function(){
+
+const home =
+document.getElementById("homePage");
+
+if(home){
+
+home.innerHTML += `
+
+<div style="padding:15px;">
+
+<input
+id="searchFilm"
+placeholder="🔍 Cari Film..."
+style="
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+background:#2b2b2b;
+color:white;
+"
+onkeyup="cariFilm()">
+
+</div>
+
+<h2 style="padding:15px;">
+🎬 Film Lainnya
+</h2>
+
+<div class="row" id="filmTambahan">
+
+<div class="movie">
+<img src="https://placehold.co/180x250">
+<h3>Iron Man</h3>
+</div>
+
+<div class="movie">
+<img src="https://placehold.co/180x250">
+<h3>Captain America</h3>
+</div>
+
+<div class="movie">
+<img src="https://placehold.co/180x250">
+<h3>Thor</h3>
+</div>
+
+<div class="movie">
+<img src="https://placehold.co/180x250">
+<h3>Doctor Strange</h3>
+</div>
+
+<div class="movie">
+<img src="https://placehold.co/180x250">
+<h3>Black Panther</h3>
+</div>
+
+<div class="movie">
+<img src="https://placehold.co/180x250">
+<h3>Hulk</h3>
+</div>
+
+<div class="movie">
+<img src="https://placehold.co/180x250">
+<h3>Flash</h3>
+</div>
+
+<div class="movie">
+<img src="https://placehold.co/180x250">
+<h3>Aquaman</h3>
+</div>
+
+<div class="movie">
+<img src="https://placehold.co/180x250">
+<h3>Superman</h3>
+</div>
+
+<div class="movie">
+<img src="https://placehold.co/180x250">
+<h3>Deadpool</h3>
+</div>
+
+</div>
+
+`;
+
+}
+
+},1000);
+
+function cariFilm(){
+
+const input =
+document.getElementById(
+"searchFilm"
+);
+
+if(!input) return;
+
+const filter =
+input.value.toLowerCase();
+
+const film =
+document.querySelectorAll(
+".movie"
+);
+
+film.forEach(item=>{
+
+const text =
+item.innerText.toLowerCase();
+
+if(text.includes(filter)){
+
+item.style.display="block";
+
+}else{
+
+item.style.display="none";
+
+}
+
+});
+
+}
+
+</script>
